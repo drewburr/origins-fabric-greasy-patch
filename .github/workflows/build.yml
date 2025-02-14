@@ -12,20 +12,24 @@ jobs:
     name: 'Build lib & main JAR'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
+
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
           cache: 'gradle'
+
       - name: Run custom build script
         run: ./build.sh
+
       - name: Calculate JAR SHA256 sum
         run:
           # i'll send the jar in discord, but dumping the sha256 hash in the pipeline means people can verify it
           sha256sum build/libs/${{ env.OUTPUT_JAR_FILE }}
+
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ env.OUTPUT_JAR_FILE }}
