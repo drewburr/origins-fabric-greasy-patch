@@ -38,11 +38,6 @@ jobs:
       - name: Build with Gradle
         run: ./build.sh
 
-      - name: Calculate JAR SHA256 sum
-        run:
-          # dumping the sha256 hash in the pipeline means people can verify it
-          sha256sum build/libs/${{ env.OUTPUT_JAR_FILE }}
-
       # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
       # the publishing section of your build.gradle
       - name: Publish to GitHub Packages
